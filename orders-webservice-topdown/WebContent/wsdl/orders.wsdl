@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions 
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+xmlns:tns="http://myapp.com/orders/" 
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+name="orders" targetNamespace="http://myapp.com/orders/">
+<wsdl:types>
+
+<xsd:schema>
+<xsd:import namespace="http://myapp.com/orders/"
+schemaLocation="orders.xsd" />
+</xsd:schema>
+
+</wsdl:types>
+<wsdl:message name="searchOperationRequest">
+<wsdl:part element="tns:ProductName" name="productName"/>
+</wsdl:message>
+<wsdl:message name="searchOperationResponse">
+<wsdl:part element="tns:OrdersList" name="ordersList"/>
+</wsdl:message>
+<wsdl:portType name="orders">
+<wsdl:operation name="search">
+<wsdl:input message="tns:searchOperationRequest"/>
+<wsdl:output message="tns:searchOperationResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="ordersSOAP" type="tns:orders">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="search">
+<soap:operation soapAction="http://myapp.com/orders/search"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="orders">
+<wsdl:port binding="tns:ordersSOAP" name="ordersSOAP">
+<soap:address location="http://localhost:8888/"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

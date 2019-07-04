@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://myapp.com/orders/"
+xmlns:tns="http://myapp.com/orders/"
+elementFormDefault="qualified">
+
+<complexType name="Order">
+
+<sequence>
+
+<sequence>
+<element name="productId" type="int" 
+minOccurs="1"
+maxOccurs="1"/>
+<element name="productName" type="string"/>
+<element name="description" type="string"/>
+<element name="price" type="double"/>
+<element name="imageUrl" type="string"/>
+<element name="availability" type="date"/>
+<element name="rating" type="double"/>	
+</sequence>
+</sequence>
+</complexType>
+
+<complexType name="ProductNameWrapper">
+<sequence>
+<element name="productName" type="string"
+minOccurs="1" maxOccurs="1" nillable="false" />
+</sequence>
+</complexType>
+
+<complexType name="OrderInfoWrapper">
+<sequence>
+<element name="order" type="tns:Order"
+minOccurs="0" maxOccurs="unbounded" nillable="false" />
+</sequence>
+</complexType>	
+
+<element name="ProductName" type="tns:ProductNameWrapper" />
+<element name="OrdersList" type="tns:OrderInfoWrapper" />
+
+
+</schema>
+
+<!-- <orders> <order> <productId></productId> <productName></productName> 
+</order> </orders> -->
